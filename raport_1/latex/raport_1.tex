@@ -16,10 +16,9 @@
 \usepackage{indentfirst}
 \usepackage{caption}
 \usepackage{subcaption}
-
 \title{Raport 1}
 \author{Aleksander Jakóbczyk i Bogdan Banasiak\\ 
-	Nr indeksu: 255939 i !!!!!!!!!!!!!!!!}
+	Nr indeksu: 255939 i 256456}
 \date{}\date{}
 
 \newtheorem{theorem}{Theorem}
@@ -102,4 +101,19 @@
 		\section{Compare two estimators of $\alpha$ parameter we introduced in the laboratories}
 		\subsection{Based on the ECDF}
 		We will be conducting our simulations on consider one set of parameters $(\alpha, \beta , \gamma, \delta) = (1.5, 0.8, 2, 0)$.
+		\begin{figure}
+
+			\begin{subfigure}{.5\textwidth}
+				\centering
+				\includegraphics[width=1\linewidth]{images/stable_CDF.png}
+				\caption{C}
+			\end{subfigure}
+			\begin{subfigure}[r]{.5\textwidth}
+				\centering
+				\includegraphics[width=1\linewidth]{images/stable_CDF_large_x.png}
+				\caption{B}
+			\end{subfigure}
+			\caption{A}
+			\label{fig:same_n_max}
+		\end{figure}
 \end{document}
