@@ -6,9 +6,16 @@
 \usepackage{graphicx}
 \usepackage[shortlabels]{enumitem}
 \usepackage{amsmath}
+\usepackage{amsthm}
 \usepackage{amsfonts}
-
+\usepackage{amssymb}
 \usepackage{hyperref}
+
+
+\usepackage{xcolor}
+\usepackage{indentfirst}
+\usepackage{caption}
+\usepackage{subcaption}
 
 \title{Raport 1}
 \author{Aleksander Jakóbczyk i Bogdan Banasiak\\ 
@@ -24,7 +31,7 @@
 	
 	\maketitle
 	\section*{title}
-	\section*{Information and formulas}
+	\section{Information and formulas}
 		\subsection*{Stable random variable}
 		There are two parameterizations of a random variable from an alpha stable distribution $S(\alpha, \beta , \gamma, \delta; 0)$ and $S(\alpha, \beta , \gamma, \delta; 1)$.
 		They are uniquely determined by the characteristic function.
@@ -84,5 +91,15 @@
 				f_X(-x) &\sim  \alpha \gamma^\alpha (1-\beta)c_a x^{-(\alpha + 1)}
 			\end{align*}
 		\end{theorem}
-	
+		
+		\begin{definition}Let $X_1,\dots, X_n$ be i.i.d. random variables with the common cumulative distribution function $F(t)$. 
+			Then the empirical distribution function is defined as
+			\begin{gather*}
+				\hat{F_n}(x) = \frac{1}{n}\sum_{k = 1}^{n}\mathbf{1}_{\{X_k \le x\}}
+			\end{gather*}
+		\end{definition}
+		
+		\section{Compare two estimators of $\alpha$ parameter we introduced in the laboratories}
+		\subsection{Based on the ECDF}
+		We will be conducting our simulations on consider one set of parameters $(\alpha, \beta , \gamma, \delta) = (1.5, 0.8, 2, 0)$.
 \end{document}
