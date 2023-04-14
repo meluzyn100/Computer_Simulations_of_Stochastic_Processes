@@ -25,6 +25,7 @@
 \newtheorem{definition}{Definition}
 
 \DeclareMathOperator{\sign}{sign}
+\renewcommand*{\thesubsubsection}{\alph{subsubsection}}
 
 \begin{document}
 	
@@ -101,8 +102,8 @@
 		\section{Compare two estimators of $\alpha$ parameter we introduced in the laboratories}
 		\subsection{Based on the ECDF}
 		We will be conducting our simulations on consider one set of parameters $(\alpha, \beta , \gamma, \delta) = (1.5, 0.8, 2, 0)$.
-		\begin{figure}
 
+		\begin{figure}
 			\begin{subfigure}{.5\textwidth}
 				\centering
 				\includegraphics[width=1\linewidth]{images/stable_CDF.png}
@@ -114,6 +115,26 @@
 				\caption{B}
 			\end{subfigure}
 			\caption{A}
-			\label{fig:same_n_max}
 		\end{figure}
+
+		\begin{figure}
+			\centering
+			\includegraphics[width=1\linewidth]{images/compare_cdf_plots_type_1.png}
+			\caption{C}
+		\end{figure}
+
+		\begin{figure}
+			\begin{subfigure}{.5\textwidth}
+				\centering
+				\includegraphics[width=1\linewidth]{images/cdf_alpha_hist.png}
+				\caption{C}
+			\end{subfigure}
+			\begin{subfigure}[r]{.5\textwidth}
+				\centering
+				\includegraphics[width=1\linewidth]{images/cdf_alpha_boxplot.png}
+				\caption{B}
+			\end{subfigure}
+			\caption{A}
+		\end{figure}
+
 \end{document}
