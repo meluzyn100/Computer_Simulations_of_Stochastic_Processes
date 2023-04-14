@@ -1,7 +1,7 @@
 \documentclass{article}
 \usepackage[utf8]{inputenc}
 \usepackage{geometry}
-\usepackage{polski}
+%\usepackage{polski}
 \usepackage{float}
 \usepackage{graphicx}
 \usepackage[shortlabels]{enumitem}
@@ -30,7 +30,7 @@
 \begin{document}
 	
 	\maketitle
-	\section*{title}
+	%\section*{title}
 	\section{Information and formulas}
 		\subsection*{Stable random variable}
 		There are two parameterizations of a random variable from an alpha stable distribution $S(\alpha, \beta , \gamma, \delta; 0)$ and $S(\alpha, \beta , \gamma, \delta; 1)$.
@@ -100,11 +100,18 @@
 		\end{definition}
 		
 		\section{Compare two estimators of $\alpha$ parameter we introduced in the laboratories}
+		
+		
 		\subsection{Based on the ECDF}
+		
 		We will be conducting our simulations on consider one set of parameters $(\alpha, \beta , \gamma, \delta) = (1.5, 0.8, 2, 0)$.
-
-		\begin{figure}
-			\begin{subfigure}{.5\textwidth}
+		
+		We gernerated $2*10^6$ samples of alfa-stable distribution. A figure \ref{stable_cdf} depicts cumulative distribution function of theoretical variable (blue) compared to generated one (orange). Based on this graph (EWENTUALKNIE KS TEST), we can assume that the program that generates the variables is working correctly.
+		
+		Graph at the right side shows CDF for higher values of $x$, thanks to which we can use the first method of estimation parameter $\alpha$ (TUTAJ REF DO TEORII).    
+		
+		\begin{figure}	
+			\begin{subfigure}[h]{.5\textwidth}
 				\centering
 				\includegraphics[width=1\linewidth]{images/stable_CDF.png}
 				\caption{C}
@@ -114,13 +121,19 @@
 				\includegraphics[width=1\linewidth]{images/stable_CDF_large_x.png}
 				\caption{B}
 			\end{subfigure}
-			\caption{A}
+			\caption{A}\label{stable_cdf}
 		\end{figure}
 
+		Following the first method, using logarithm of distribution's tail, we successfully fitted parameters to our model. Results are shown at figure \ref{tails1}, where blue line is a teoretical distribution (NA PEWNO TEORETYCZNY? JEŚLI TAK, TO W LEGENDZIE JEST DASH NAD F), orange line represents empirical one and green is a fitted model.
+		
+		After checking the correctness of the method, we estimated 1000 times parameter $\alpha$ using 20000 samples every time.
+		Distribution of estimated parameters can be observed at figure \ref{alpha1}, where we place density histogram and boxplot.
+		We can see, that the mean of estimation is correct, but there are also a lot of outliers.		 
+		
 		\begin{figure}
 			\centering
 			\includegraphics[width=1\linewidth]{images/compare_cdf_plots_type_1.png}
-			\caption{C}
+			\caption{C}\label{tails1}
 		\end{figure}
 
 		\begin{figure}
@@ -132,7 +145,7 @@
 			\begin{subfigure}[r]{.5\textwidth}
 				\centering
 				\includegraphics[width=1\linewidth]{images/cdf_alpha_boxplot.png}
-				\caption{B}
+				\caption{B}\label{alpha1}
 			\end{subfigure}
 			\caption{A}
 		\end{figure}
