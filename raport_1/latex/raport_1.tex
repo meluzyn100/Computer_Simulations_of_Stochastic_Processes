@@ -1,7 +1,7 @@
 \documentclass{article}
 \usepackage[utf8]{inputenc}
 \usepackage{geometry}
-\usepackage{polski}
+%\usepackage{polski}
 \usepackage{float}
 \usepackage{graphicx}
 \usepackage[shortlabels]{enumitem}
@@ -10,6 +10,7 @@
 \usepackage{amsfonts}
 \usepackage{amssymb}
 \usepackage{hyperref}
+\usepackage{array}
 
 
 \usepackage{xcolor}
@@ -30,7 +31,7 @@
 \begin{document}
 	
 	\maketitle
-	\section*{title}
+	%\section*{title}
 	\section{Information and formulas}
 		\subsection*{Stable random variable}
 		There are two parameterizations of a random variable from an alpha stable distribution $S(\alpha, \beta , \gamma, \delta; 0)$ and $S(\alpha, \beta , \gamma, \delta; 1)$.
@@ -46,24 +47,36 @@
 		\end{definition}
 		\begin{definition} Let $X \sim S(\alpha, \beta , \gamma, \delta; 0)$ with $\alpha \in (0,2]$, $\beta \in [-1,1]$, $\gamma \ge 0$, $\delta\in\mathbb{R}$ then  
 			\begin{gather*}
-				X =^d 
+				X \stackrel{d}{=} 
 				\begin{cases}
 					\gamma (Z- \beta\tan(\frac{\pi\alpha}{2})+\delta)& \alpha\ne1,\\
 					\gamma Z + \delta& \alpha=1,
 				\end{cases}
 			\end{gather*}
-			where $Z = Z(\alpha,\beta)$ is given by \ref{def:case Z}.
+			where $Z = Z(\alpha,\beta)$ is given by \ref{def:case Z}. $X$ has characteristic function
+			\begin{gather*}
+				E \exp (i u X)= \begin{cases}
+					\exp \left(-\gamma^\alpha|u|^\alpha\left[1+i \beta\left(\tan \frac{\pi \alpha}{2}\right)(\operatorname{sign} u)\left(|\gamma u|^{1-\alpha}-1\right)\right]+i \delta u\right) & \alpha \neq 1 \\ \exp \left(-\gamma|u|\left[1+i \beta \frac{2}{\pi}(\operatorname{sign} u) \log (\gamma|u|)\right]+i \delta u\right) & \alpha=1
+				\end{cases}
+			\end{gather*}
 		\end{definition}
 
 		\begin{definition} Let $X \sim S(\alpha, \beta , \gamma, \delta; 1)$ with $\alpha \in (0,2]$, $\beta \in [-1,1]$, $\gamma \ge 0$, $\delta\in\mathbb{R}$ then  
 			\begin{gather*}
-				X =^d 
+				X \stackrel{d}{=} 
 				\begin{cases}
 					\gamma Z + \delta & \alpha \ne 1,\\
 					\gamma Z + (\delta + \beta\frac{2}{\pi}\ln\gamma)& \alpha = 1,
 				\end{cases}
 			\end{gather*}
-			where $Z = Z(\alpha,\beta)$ is given by \ref{def:case Z}.
+			where $Z = Z(\alpha,\beta)$ is given by \ref{def:case Z}. $X$ has characteristic function
+			
+			\begin{gather*}
+				E \exp (i u X)= 
+				\begin{cases}
+					\exp \left(-\gamma^\alpha|u|^\alpha\left[1-i \beta\left(\tan \frac{\pi \alpha}{2}\right)(\operatorname{sign} u)\right]+i \delta u\right) & \alpha \neq 1 \\ \exp \left(-\gamma|u|\left[1+i \beta \frac{2}{\pi}(\operatorname{sign} u) \log |u|\right]+i \delta u\right) & \alpha=1
+				\end{cases}
+			\end{gather*}
 		\end{definition}
 
 		Above we defined the general stable law in the 0-parameterization and 1-parameterization.
@@ -80,6 +93,7 @@
 		The tail exponent estimation method gives us the information
 		about the index of stability. The tails of stable random variable are asymptotically power laws. 
 		\begin{theorem}[Tail approximation] Let $X \sim S(\alpha, \beta , \gamma, \delta; k)$ with $\alpha \in (0,2)$, $\beta \in (-1,1]$, $k=0,1$ then as~$x\to \infty$:
+			\label{theorem:Tail approximation}
 			\begin{align*}
 				1 - F_X(x) &\sim \gamma^\alpha c_a (1+\beta)x^{-\alpha},\\
 				f_X(x) &\sim \alpha \gamma^\alpha c_a (1+\beta) x^{-(\alpha + 1)}
@@ -91,7 +105,21 @@
 				f_X(-x) &\sim  \alpha \gamma^\alpha (1-\beta)c_a x^{-(\alpha + 1)}
 			\end{align*}
 		\end{theorem}
-		
+		It follows from the above theorem that for $x\to\infty$
+		\begin{gather*}
+			1 - F(x) \sim Cx^{-\alpha} \implies \ln(1-F(x)) \sim \ln(C) -\alpha \ln(x)
+		\end{gather*}
+
+		\begin{theorem}  Let $X \sim S(\alpha, \beta , \gamma, \delta; k)$ wwith $\alpha \in (0,2]$, $\beta \in [-1,1]$, $\gamma \ge 0$, $\delta\in\mathbb{R}$, $k=0,1$ then
+			\label{theorem:CF}
+			\begin{align*}
+				|\varphi_X(u)| &= e^{-C|u|^\alpha} \implies \\
+				\ln |\varphi_X(u)| &= -C|u|^\alpha \implies \\
+				\ln(-\ln |\varphi_X(u)| &= \ln(C) + \alpha\ln|u|
+			\end{align*}
+		\end{theorem}
+		Theorems \ref{theorem:Tail approximation} and \ref{theorem:CF} allows us to determine the stability index using linear regression.
+
 		\begin{definition}Let $X_1,\dots, X_n$ be i.i.d. random variables with the common cumulative distribution function $F(t)$. 
 			Then the empirical distribution function is defined as
 			\begin{gather*}
@@ -100,11 +128,18 @@
 		\end{definition}
 		
 		\section{Compare two estimators of $\alpha$ parameter we introduced in the laboratories}
+		
+		
 		\subsection{Based on the ECDF}
+		
 		We will be conducting our simulations on consider one set of parameters $(\alpha, \beta , \gamma, \delta) = (1.5, 0.8, 2, 0)$.
-
-		\begin{figure}
-			\begin{subfigure}{.5\textwidth}
+		
+		We gernerated $2\cdot10^6$ samples of alfa-stable distribution. A figure \ref{stable_cdf} depicts cumulative distribution function of theoretical variable (blue) compared to generated one (orange). Based on this graph (EWENTUALKNIE KS TEST), we can assume that the program that generates the variables is working correctly.
+		
+		Graph at the right side shows CDF for higher values of $x$, thanks to which we can use the first method of estimation parameter $\alpha$ (TUTAJ REF DO TEORII).    
+		
+		\begin{figure}[H]	
+			\begin{subfigure}[h]{.5\textwidth}
 				\centering
 				\includegraphics[width=1\linewidth]{images/stable_CDF.png}
 				\caption{C}
@@ -114,16 +149,22 @@
 				\includegraphics[width=1\linewidth]{images/stable_CDF_large_x.png}
 				\caption{B}
 			\end{subfigure}
-			\caption{A}
+			\caption{A}\label{stable_cdf}
 		\end{figure}
 
-		\begin{figure}
+		Following the first method, using logarithm of distribution's tail, we successfully fitted parameters to our model. Results are shown at figure \ref{tails1}, where blue line is a teoretical distribution (NA PEWNO TEORETYCZNY? JEŚLI TAK, TO W LEGENDZIE JEST DASH NAD F), orange line represents empirical one and green is a fitted model.
+		
+		After checking the correctness of the method, we estimated 1000 times parameter $\alpha$ using 20000 samples every time.
+		Distribution of estimated parameters can be observed at figure \ref{alpha1}, where we place density histogram and boxplot.
+		We can see, that the mean of estimation is correct, but there are also a lot of outliers.		 
+		
+		\begin{figure}[H]
 			\centering
 			\includegraphics[width=1\linewidth]{images/compare_cdf_plots_type_1.png}
-			\caption{C}
+			\caption{C}\label{tails1}
 		\end{figure}
 
-		\begin{figure}
+		\begin{figure}[H]
 			\begin{subfigure}{.5\textwidth}
 				\centering
 				\includegraphics[width=1\linewidth]{images/cdf_alpha_hist.png}
@@ -132,11 +173,99 @@
 			\begin{subfigure}[r]{.5\textwidth}
 				\centering
 				\includegraphics[width=1\linewidth]{images/cdf_alpha_boxplot.png}
+				\caption{B}\label{alpha1}
+			\end{subfigure}
+			\caption{A}
+		\end{figure}
+
+		\begin{tabular}[H]{|r|r|r|r|r|r|r|r|}
+			\hline
+			count &      mean &       std &       min &     25\% &       50\% &     75\% &      max \\\hline
+			1000.0 &  1.503905 &  0.164877 &  1.020862 &  1.3874 &  1.494809 &  1.6061 &  2.08134 \\\hline
+		\end{tabular}
+
+		\begin{figure}[H]
+			\begin{subfigure}{.5\textwidth}
+				\centering
+				\includegraphics[width=1\linewidth]{images/heatmap_cdf_MSE_alpha_beta.png}
+				\caption{C}
+			\end{subfigure}
+			\begin{subfigure}[r]{.5\textwidth}
+				\centering
+				\includegraphics[width=1\linewidth]{images/heatmap_cdf_MSE_gamma_delta.png}
+				\caption{B}
+			\end{subfigure}
+			\caption{A}
+		\end{figure}
+
+		\begin{figure}[H]
+			\begin{subfigure}{.5\textwidth}
+				\centering
+				\includegraphics[width=1\linewidth]{images/heatmap_cdf_MAE_alpha_beta.png}
+				\caption{C}
+			\end{subfigure}
+			\begin{subfigure}[r]{.5\textwidth}
+				\centering
+				\includegraphics[width=1\linewidth]{images/heatmap_cdf_MAE_gamma_delta.png}
+				\caption{B}
+			\end{subfigure}
+			\caption{A}
+		\end{figure}
+
+		\subsection{Based on the CF}
+
+		\begin{figure}[H]
+				\centering
+				\includegraphics[width=1\linewidth]{images/stable_CF.png}
+			\caption{A}\label{stable_cdf}
+		\end{figure}
+
+		\begin{figure}[H]
+			\centering
+			\includegraphics[width=1\linewidth]{images/compare_cf.png}
+			\caption{C}\label{tails1}
+		\end{figure}
+
+		\begin{figure}[H]
+			\begin{subfigure}{.5\textwidth}
+				\centering
+				\includegraphics[width=1\linewidth]{images/cf_alpha_hist.png}
+				\caption{C}
+			\end{subfigure}
+			\begin{subfigure}[r]{.5\textwidth}
+				\centering
+				\includegraphics[width=1\linewidth]{images/cf_alpha_boxplot.png}
+				\caption{B}\label{alpha1}
+			\end{subfigure}
+			\caption{A}
+		\end{figure}
+		
+		\begin{figure}[H]
+			\begin{subfigure}{.5\textwidth}
+				\centering
+				\includegraphics[width=1\linewidth]{images/heatmap_cf_MSE_alpha_beta.png}
+				\caption{C}
+			\end{subfigure}
+			\begin{subfigure}[r]{.5\textwidth}
+				\centering
+				\includegraphics[width=1\linewidth]{images/heatmap_cf_MSE_gamma_delta.png}
+				\caption{B}
+			\end{subfigure}
+			\caption{A}
+		\end{figure}
+
+		\begin{figure}[H]
+			\begin{subfigure}{.5\textwidth}
+				\centering
+				\includegraphics[width=1\linewidth]{images/heatmap_cf_MAE_alpha_beta.png}
+				\caption{C}
+			\end{subfigure}
+			\begin{subfigure}[r]{.5\textwidth}
+				\centering
+				\includegraphics[width=1\linewidth]{images/heatmap_cf_MAE_gamma_delta.png}
 				\caption{B}
 			\end{subfigure}
 			\caption{A}
 		\end{figure}
 		
-		\subsection{Based on the ECDF}
-
 \end{document}
