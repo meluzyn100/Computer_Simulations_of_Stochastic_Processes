@@ -12,14 +12,13 @@
 \usepackage{hyperref}
 \usepackage{array}
 
-
 \usepackage{xcolor}
 \usepackage{indentfirst}
 \usepackage{caption}
 \usepackage{subcaption}
-\title{Raport 1}
+\title{Report 1}
 \author{Aleksander Jakóbczyk i Bogdan Banasiak\\ 
-	Nr indeksu: 255939 i 256456}
+	Index number: 255939 i 256456}
 \date{}\date{}
 
 \newtheorem{theorem}{Theorem}
@@ -161,8 +160,8 @@
 		Following the first method, using logarithm of distribution's tail, we successfully fitted parameters to our model.
 		Results are shown at figure \ref{tails1}, where blue line is a teoretical distribution, orange line represents empirical one and green is a fitted model.
 		\subsubsection{}
-        After checking the correctness of the method, we estimated parameter $\alpha$ using a Monte Carlo simulation with 1000 steps and, 20000 samples every time.
-		Distribution of estimated parameters can be observed at figure \ref{alpha1}, where we place density histogram and boxplot.
+        After checking the correctness of the method, we estimated parameter $\alpha$ using a Monte Carlo simulation with 1000 steps and 20000 samples on each step.
+		Distribution of estimated parameters can be observed at figure \ref{alpha1}, where we have placed density histogram and boxplot.
 		We can see, that the mean of estimation is correct, but there are also a lot of outliers.		 
 		
 		\begin{figure}[H]
@@ -184,16 +183,27 @@
 			\end{subfigure}
 			\caption{Distribution of the estimator of the $\alpha$ parameter based on Monte Carlo simulations for tail approximation method.}\label{alpha1}
 		\end{figure}
+	
+		In addition, we have included basic statistics in the table \ref{tabelka1}. We can see, that the distribution of estimator has high std.  Maximal and minimal values are absolutly too far from true value of $\hat\alpha$. Skewness is equal to 0.28487 and with the analysis of the graph we assess, that distribution is right-skewed. The kurtosis is close to zero, so we can assume that it is leptokurtic distribution, so we can expect havy tails and this is correct with values of quantiles.
+		
 		\begin{table}[H]
 			\centering
-			\begin{tabular}{|r|r|r|r|r|r|r|r|}
+			\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|}
 				\hline
-				count &      mean &       std &       min &     25\% &       50\% &     75\% &      max \\\hline
-				1000.0 &  1.503905 &  0.164877 &  1.020862 &  1.3874 &  1.494809 &  1.6061 &  2.08134 \\\hline
+				count &      mean &       std &       min &     25\% &       50\% &     75\% &      max & skewness & kurtosis \\\hline
+				1000 & 1.5081 &  0.1697 &  0.994552 &  1.3893 &  1.5051 &  1.6112 &  2.0974 & 0.2849 & 0.0931\\\hline
 			\end{tabular}
-			\caption{Table of basic statistics of the $\hat\alpha$ estimator for tail approximation method.}
+			\caption{Table of basic statistics of the $\hat\alpha$ estimator for tail approximation method.}\label{tabelka1}
 		\end{table}
 		\subsubsection{}
+		We checked, how selected parameters affect MSE and MAE. We made simulation of 100 steps of Monte Carlo and 5000 samples of generated $\hat\alpha$, to create adequate heatmaps.
+		
+		On figure \ref{heat1} we placed results for Mean Squared Error. At the left side we inserted dependencies of $\alpha$ and $\beta$ using $\gamma=2$ and $\delta=0$ and at the right side we placed dependencies of $\gamma$ and $\delta$ using $\alpha=1.5$ and $\beta=0.8$
+		
+		The main conclusion is, that the smaller $\beta$ we take, the worse results we obtain. The same result we get for $\alpha$. 
+		
+		We get smaller errors within increasing $\gamma$, but for $\delta$ we obtain the best results where it is equal to 0 and farther we go from zero, then worse. Delta should not have influance on the highest of error becouse this method uses aproximation of infinitive values, but our domain is the range from 10 to 30. We did it becouse we decided to optimalise the process of generating $\hat\alpha$, so in this case, selection of $\delta$ has big influance on the generated tails. Anyway, the differences of results depended on $\gamma$ and $\delta$ are smaller than dependent on $\alpha$ and $\beta$.
+		
 		\begin{figure}[H]
 			\begin{subfigure}{.5\textwidth}
 				\centering
@@ -205,9 +215,12 @@
 				\includegraphics[width=1\linewidth]{images/heatmap_cdf_MSE_gamma_delta.png}
 				\caption{Depending on $\gamma, \delta$ parameters and \\$\alpha = 1.5, \beta = 0.8$}
 			\end{subfigure}
-			\caption{Heatmaps of Mean Squared Error (MSE) based on Monte Carlo simulations for tail approximation method.}
+			\caption{Heatmaps of Mean Squared Error (MSE) based on Monte Carlo simulations for tail approximation method.}\label{heat1}
 		\end{figure}
-
+	
+		We created also a heatmaps of MAE (figure \ref{heat2}). We used the same parameters as in the case with MSE. In this example we obtain the same dependences, but the only one difference is with the scale of errors, what is meaningful, if we would check the formula of MAE.
+		
+		
 		\begin{figure}[H]
 			\begin{subfigure}{.5\textwidth}
 				\centering
@@ -219,38 +232,65 @@
 				\includegraphics[width=1\linewidth]{images/heatmap_cdf_MAE_gamma_delta.png}
 				\caption{Depending on $\gamma, \delta$ parameters and \\$\alpha = 1.5, \beta = 0.8$}
 			\end{subfigure}
-			\caption{Heatmaps of Mean Absolute Error (MAE) based on Monte Carlo simulations for tail approximation method.}
-
+			\caption{Heatmaps of Mean Absolute Error (MAE) based on Monte Carlo simulations for tail approximation method.}\label{heat2}
 		\end{figure}
 
 		\subsection{Based on the CF}
 		\subsubsection{}
+		Now we will consider second method of estimation parameter $\alpha$ [\ref{theorem:CF}]. First we crated an empirical characteristic function by generating 10000 samples from alpha-stabil distribution. At figure \ref{cf1} we presented comparison of theoretical (orange line) and empirical (blue line) CF. We can see, that empirical plot is similar to theoretical one.
+		
 		\begin{figure}[H]
 				\centering
 				\includegraphics[width=1\linewidth]{images/stable_CF.png}
-			\caption{CF of a random variable with an $\alpha$-stable distribution based on $n=10000$ realizations of the random variable for each $t$.}
+			\caption{CF of a random variable with an $\alpha$-stable distribution based on $n=10000$ realizations of the random variable for each $t$.}\label{cf1}
 		\end{figure}
 
-		\begin{figure}[H]
+		Following this method, using double logarithm on CF, we successfully fitted parameters to our model. Correctness of the fitting is shown in figure \ref{CF_line2}, where blue line is theoretical function, orange in estimated one and green is a line represanting suitable model.
+		
+		\begin{figure}[H] 
 			\centering
 			\includegraphics[width=1\linewidth]{images/compare_cf.png}
 			\caption{Plot of characteristic function method fitted line.}\label{CF_line}
 		\end{figure}
 		\subsubsection{}
+		
+		We checked the correctness of this method by estimating parameter $\alpha$ using a Monte Carlo simulation with 1000 steps and 5000 samples on each step.
+		
+		Distribution of estimated parameters can be observed in figure \ref{alpha2}, where we have placed density histogram and boxplot and we have included basic statistics in the table \ref{tabelka2}.
+		We can see, that the mean of estimation is correct. We obtain better std then using tail approximation method. Whatsmore, in this case, the skewness is low, close to 0. The kurtosis is equal to -0.1926, so the distribution is platokurtic.
+		
 		\begin{figure}[H]
 			\begin{subfigure}{.5\textwidth}
 				\centering
 				\includegraphics[width=1\linewidth]{images/cf_alpha_hist.png}
-				\caption{Histogram of the $\hat\alpha$ estimator.}
+				\caption{Histogram of the $\hat\alpha$ estimator.}\label{CF_line2}
 			\end{subfigure}
 			\begin{subfigure}[r]{.5\textwidth}
 				\centering
 				\includegraphics[width=1\linewidth]{images/cf_alpha_boxplot.png}
-				\caption{Boxplot.}
+				\caption{Boxplot of the $\hat\alpha$ estimator.}
 			\end{subfigure}
-			\caption{Distribution of the estimator of the $\alpha$ parameter based on Monte Carlo simulations for characteristic function method.}\label{alpha1}
+			\caption{Distribution of the estimator of the $\alpha$ parameter based on Monte Carlo simulations for characteristic function method.}\label{alpha2}
 		\end{figure}
+		
+		\begin{table}[H]
+			\centering
+			\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|}
+				\hline
+				count &      mean &       std &       min &       25\% &      50\% &     75\% & max & skewness & kurtosis
+				\\\hline
+				1000.0 &  1.4989 &  0.0185 &  1.4468 &  1.4868 &  1.498 &  1.5118 &  1.5543 & 0.0294 & -0.1926\\\hline
+			\end{tabular}
+			\caption{Table of basic statistics of the $\hat\alpha$ estimator for tail approximation method.}\label{tabelka2}
+		\end{table}
+	
 		\subsubsection{}
+		We checked, how selected parameters affect MSE and MAE. We made simulation of 100 steps of Monte Carlo and 5000 samples of generated $\hat\alpha$, to create adequate heatmaps.
+		
+		On figure \ref{heat3} we placed results for Mean Squared Error. At the left side we inserted dependencies of $\alpha$ and $\beta$ using $\gamma=2$ and $\delta=0$ and at the right side we placed dependencies of $\gamma$ and $\delta$ using $\alpha=1.5$ and $\beta=0.8$
+		
+		In this case, the dependencies are really visuable. We get bigger errors within increasing $\alpha$ and $\gamma$. Changing $\beta$ and $\delta$ has no effect on the size of the error.
+		
 		\begin{figure}[H]
 			\begin{subfigure}{.5\textwidth}
 				\centering
@@ -260,10 +300,14 @@
 			\begin{subfigure}[r]{.5\textwidth}
 				\centering
 				\includegraphics[width=1\linewidth]{images/heatmap_cf_MSE_gamma_delta.png}
-				\caption{Depending on $\gamma, \delta$ parameters and \\$\alpha = 1.5, \beta = 0.8$}
+				\caption{{Depending on $\gamma, \delta$ parameters and \\$\alpha = 1.5, \beta = 0.8$}}
 			\end{subfigure}
-			\caption{Heatmaps of Mean Squared Error (MSE) based on Monte Carlo simulations for characteristic function method.}
+			\caption{Heatmaps of Mean Squared Error (MSE) based on Monte Carlo simulations for characteristic function method.}\label{heat3}
 		\end{figure}
+
+		On figure \ref{heat4} we placed results for Mean Absolute Error. At the left side we inserted dependencies of $\alpha$ and $\beta$ using $\gamma=2$ and $\delta=0$ and at the right side we placed dependencies of $\gamma$ and $\delta$ using $\alpha=1.5$ and $\beta=0.8$
+
+		The conclussion is that the size of error depend only on $\alpha$. The bigger $\alpha$, the higher error we get. High error at the bottom of right graph is coused by taking $\gamma$ to closed to 0, which is out of domain of alpha-stable distribution.
 
 		\begin{figure}[H]
 			\begin{subfigure}{.5\textwidth}
@@ -276,7 +320,11 @@
 				\includegraphics[width=1\linewidth]{images/heatmap_cf_MAE_gamma_delta.png}
 				\caption{Depending on $\gamma, \delta$ parameters and \\$\alpha = 1.5, \beta = 0.8$}
 			\end{subfigure}
-			\caption{Heatmaps of Mean Absolute Error (MAE) based on Monte Carlo simulations for characteristic function method.}
+			\caption{Heatmaps of Mean Absolute Error (MAE) based on Monte Carlo simulations for characteristic function method.}\label{heat4}
 		\end{figure}
-		
+	
+	\subsection{Summary}
+	We presented the operation of both methods, which estimate parameter $\alpha$. We proved, that both of them works correctly. Errors, we obtianed by using the method which bases on characteristic function, depend strongly on parameter $\alpha$.
+	 
+	
 \end{document}
