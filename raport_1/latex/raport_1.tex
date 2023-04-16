@@ -26,7 +26,7 @@
 \newtheorem{definition}{Definition}
 
 \DeclareMathOperator{\sign}{sign}
-\renewcommand*{\thesubsubsection}{\alph{subsubsection}}
+\renewcommand{\thesubsubsection}{\thesubsection. \roman{subsubsection})}
 
 \begin{document}
 	
@@ -37,13 +37,13 @@
 		There are two parameterizations of a random variable from an alpha stable distribution $S(\alpha, \beta , \gamma, \delta; 0)$ and $S(\alpha, \beta , \gamma, \delta; 1)$.
 		They are uniquely determined by the characteristic function.
 		\begin{definition} A random variable $X$ is stable if and only if $X=^d aZ +b$, with \\$\alpha \in (0,2],\;\beta\in [-1,1],\; a\ne1,\; b\in\mathbb{R}$ and $Z$ is a random variable with characteristic function  
-			\begin{gather}
+			\begin{gather*}
 				\varphi_Z(u) = \exp(i u Z) =
 				\begin{cases}\label{def:case Z}
 					\exp\left(- |u|^\alpha(1-i\beta\tan(\frac{\pi\alpha}{2})(\sign u)  \right) &\alpha \ne 1,\\
 					\exp\left(- |u|^\alpha(1+i\beta\frac{2}{\pi}(\sign u)\ln|u|  \right) &\alpha = 1.
 				\end{cases}
-			\end{gather}
+			\end{gather*}
 		\end{definition}
 		\begin{definition} Let $X \sim S(\alpha, \beta , \gamma, \delta; 0)$ with $\alpha \in (0,2]$, $\beta \in [-1,1]$, $\gamma \ge 0$, $\delta\in\mathbb{R}$ then  
 			\begin{gather*}
@@ -106,16 +106,16 @@
 			\end{align*}
 		\end{theorem}
 		It follows from the above theorem that for $x\to\infty$
-		\begin{gather*}
+		\begin{gather}\label{Tail approximation polifit}
 			1 - F(x) \sim Cx^{-\alpha} \implies \ln(1-F(x)) \sim \ln(C) -\alpha \ln(x)
-		\end{gather*}
+		\end{gather}
 
 		\begin{theorem}  Let $X \sim S(\alpha, \beta , \gamma, \delta; k)$ wwith $\alpha \in (0,2]$, $\beta \in [-1,1]$, $\gamma \ge 0$, $\delta\in\mathbb{R}$, $k=0,1$ then
 			\label{theorem:CF}
 			\begin{align*}
 				|\varphi_X(u)| &= e^{-C|u|^\alpha} \implies \\
 				\ln |\varphi_X(u)| &= -C|u|^\alpha \implies \\
-				\ln(-\ln |\varphi_X(u)| &= \ln(C) + \alpha\ln|u|
+				\ln(-\ln |\varphi_X(u)|) &= \ln(C) + \alpha\ln|u|
 			\end{align*}
 		\end{theorem}
 		Theorems \ref{theorem:Tail approximation} and \ref{theorem:CF} allows us to determine the stability index using linear regression.
@@ -126,146 +126,157 @@
 				\hat{F_n}(x) = \frac{1}{n}\sum_{k = 1}^{n}\mathbf{1}_{\{X_k \le x\}}
 			\end{gather*}
 		\end{definition}
-		
+		\begin{definition}Let $X_1,\dots, X_n$ be i.i.d. random variables with the characteristic function $\varphi(t)$. 
+			Then the empirical characteristic function is defined as
+			\begin{gather*}
+				\hat{\varphi_n}(u) = \frac{1}{n}\sum_{k = 1}^{n}e^{-i u X_k}
+			\end{gather*}
+		\end{definition}
 		\section{Compare two estimators of $\alpha$ parameter we introduced in the laboratories}
-		
-		
-		\subsection{Based on the ECDF}
-		
+
 		We will be conducting our simulations on consider one set of parameters $(\alpha, \beta , \gamma, \delta) = (1.5, 0.8, 2, 0)$.
+
+		\subsection{Based on the ECDF}
+		\subsubsection{}
+		We gernerated $n = 10^6$ samples of alfa-stable distribution.
+		A figure \ref{stable_cdf} depicts cumulative distribution function of theoretical variable (blue) compared to generated one (orange).
+		Based on this graph  and the KS test $p\text{-value} = 0.14623$ we do not reject the hypothesis of different distributions and assume that the program that generates the variables is working correctly.
 		
-		We gernerated $2\cdot10^6$ samples of alfa-stable distribution. A figure \ref{stable_cdf} depicts cumulative distribution function of theoretical variable (blue) compared to generated one (orange). Based on this graph (EWENTUALKNIE KS TEST), we can assume that the program that generates the variables is working correctly.
-		
-		Graph at the right side shows CDF for higher values of $x$, thanks to which we can use the first method of estimation parameter $\alpha$ (TUTAJ REF DO TEORII).    
+		Graph at the right side shows CDF for higher values of $x$, thanks to which we can use the first method of estimation parameter $\alpha$ based on theorem \ref{theorem:Tail approximation} and properties \ref{Tail approximation polifit}.    
 		
 		\begin{figure}[H]	
 			\begin{subfigure}[h]{.5\textwidth}
 				\centering
 				\includegraphics[width=1\linewidth]{images/stable_CDF.png}
-				\caption{C}
+				\caption{CDF simulated for $x \in (-10,30)$.}
 			\end{subfigure}
 			\begin{subfigure}[r]{.5\textwidth}
 				\centering
 				\includegraphics[width=1\linewidth]{images/stable_CDF_large_x.png}
-				\caption{B}
+				\caption{CDF simulated of tail for $x \in (10,30)$.}
 			\end{subfigure}
-			\caption{A}\label{stable_cdf}
+			\caption{CDF of a random variable with an $\alpha$-stable distribution based on $n=10^6$ realizations of the random variable.}\label{stable_cdf}
 		\end{figure}
 
-		Following the first method, using logarithm of distribution's tail, we successfully fitted parameters to our model. Results are shown at figure \ref{tails1}, where blue line is a teoretical distribution (NA PEWNO TEORETYCZNY? JEŚLI TAK, TO W LEGENDZIE JEST DASH NAD F), orange line represents empirical one and green is a fitted model.
-		
-		After checking the correctness of the method, we estimated 1000 times parameter $\alpha$ using 20000 samples every time.
+		Following the first method, using logarithm of distribution's tail, we successfully fitted parameters to our model.
+		Results are shown at figure \ref{tails1}, where blue line is a teoretical distribution, orange line represents empirical one and green is a fitted model.
+		\subsubsection{}
+        After checking the correctness of the method, we estimated parameter $\alpha$ using a Monte Carlo simulation with 1000 steps and, 20000 samples every time.
 		Distribution of estimated parameters can be observed at figure \ref{alpha1}, where we place density histogram and boxplot.
 		We can see, that the mean of estimation is correct, but there are also a lot of outliers.		 
 		
 		\begin{figure}[H]
 			\centering
 			\includegraphics[width=1\linewidth]{images/compare_cdf_plots_type_1.png}
-			\caption{C}\label{tails1}
+			\caption{Plot of tail approximation method fitted line.}\label{tails1}
 		\end{figure}
 
 		\begin{figure}[H]
 			\begin{subfigure}{.5\textwidth}
 				\centering
 				\includegraphics[width=1\linewidth]{images/cdf_alpha_hist.png}
-				\caption{C}
+				\caption{Histogram of the $\hat\alpha$ estimator.				}
 			\end{subfigure}
 			\begin{subfigure}[r]{.5\textwidth}
 				\centering
 				\includegraphics[width=1\linewidth]{images/cdf_alpha_boxplot.png}
-				\caption{B}\label{alpha1}
+				\caption{Boxplot}
 			\end{subfigure}
-			\caption{A}
+			\caption{Distribution of the estimator of the $\alpha$ parameter based on Monte Carlo simulations for tail approximation method.}\label{alpha1}
 		\end{figure}
-
-		\begin{tabular}[H]{|r|r|r|r|r|r|r|r|}
-			\hline
-			count &      mean &       std &       min &     25\% &       50\% &     75\% &      max \\\hline
-			1000.0 &  1.503905 &  0.164877 &  1.020862 &  1.3874 &  1.494809 &  1.6061 &  2.08134 \\\hline
-		\end{tabular}
-
+		\begin{table}[H]
+			\centering
+			\begin{tabular}{|r|r|r|r|r|r|r|r|}
+				\hline
+				count &      mean &       std &       min &     25\% &       50\% &     75\% &      max \\\hline
+				1000.0 &  1.503905 &  0.164877 &  1.020862 &  1.3874 &  1.494809 &  1.6061 &  2.08134 \\\hline
+			\end{tabular}
+			\caption{Table of basic statistics of the $\hat\alpha$ estimator for tail approximation method.}
+		\end{table}
+		\subsubsection{}
 		\begin{figure}[H]
 			\begin{subfigure}{.5\textwidth}
 				\centering
 				\includegraphics[width=1\linewidth]{images/heatmap_cdf_MSE_alpha_beta.png}
-				\caption{C}
+				\caption{Depending on $\alpha, \beta$ parameters and \\$\gamma = 2, \delta = 0$}
 			\end{subfigure}
 			\begin{subfigure}[r]{.5\textwidth}
 				\centering
 				\includegraphics[width=1\linewidth]{images/heatmap_cdf_MSE_gamma_delta.png}
-				\caption{B}
+				\caption{Depending on $\gamma, \delta$ parameters and \\$\alpha = 1.5, \beta = 0.8$}
 			\end{subfigure}
-			\caption{A}
+			\caption{Heatmaps of Mean Squared Error (MSE) based on Monte Carlo simulations for tail approximation method.}
 		\end{figure}
 
 		\begin{figure}[H]
 			\begin{subfigure}{.5\textwidth}
 				\centering
 				\includegraphics[width=1\linewidth]{images/heatmap_cdf_MAE_alpha_beta.png}
-				\caption{C}
+				\caption{Depending on $\alpha, \beta$ parameters and \\$\gamma = 2, \delta = 0$}
 			\end{subfigure}
 			\begin{subfigure}[r]{.5\textwidth}
 				\centering
 				\includegraphics[width=1\linewidth]{images/heatmap_cdf_MAE_gamma_delta.png}
-				\caption{B}
+				\caption{Depending on $\gamma, \delta$ parameters and \\$\alpha = 1.5, \beta = 0.8$}
 			\end{subfigure}
-			\caption{A}
+			\caption{Heatmaps of Mean Absolute Error (MAE) based on Monte Carlo simulations for tail approximation method.}
+
 		\end{figure}
 
 		\subsection{Based on the CF}
-
+		\subsubsection{}
 		\begin{figure}[H]
 				\centering
 				\includegraphics[width=1\linewidth]{images/stable_CF.png}
-			\caption{A}\label{stable_cdf}
+			\caption{CF of a random variable with an $\alpha$-stable distribution based on $n=10000$ realizations of the random variable for each $t$.}
 		\end{figure}
 
 		\begin{figure}[H]
 			\centering
 			\includegraphics[width=1\linewidth]{images/compare_cf.png}
-			\caption{C}\label{tails1}
+			\caption{Plot of characteristic function method fitted line.}\label{CF_line}
 		\end{figure}
-
+		\subsubsection{}
 		\begin{figure}[H]
 			\begin{subfigure}{.5\textwidth}
 				\centering
 				\includegraphics[width=1\linewidth]{images/cf_alpha_hist.png}
-				\caption{C}
+				\caption{Histogram of the $\hat\alpha$ estimator.}
 			\end{subfigure}
 			\begin{subfigure}[r]{.5\textwidth}
 				\centering
 				\includegraphics[width=1\linewidth]{images/cf_alpha_boxplot.png}
-				\caption{B}\label{alpha1}
+				\caption{Boxplot.}
 			\end{subfigure}
-			\caption{A}
+			\caption{Distribution of the estimator of the $\alpha$ parameter based on Monte Carlo simulations for characteristic function method.}\label{alpha1}
 		\end{figure}
-		
+		\subsubsection{}
 		\begin{figure}[H]
 			\begin{subfigure}{.5\textwidth}
 				\centering
 				\includegraphics[width=1\linewidth]{images/heatmap_cf_MSE_alpha_beta.png}
-				\caption{C}
+				\caption{Depending on $\alpha, \beta$ parameters and \\$\gamma = 2, \delta = 0$}
 			\end{subfigure}
 			\begin{subfigure}[r]{.5\textwidth}
 				\centering
 				\includegraphics[width=1\linewidth]{images/heatmap_cf_MSE_gamma_delta.png}
-				\caption{B}
+				\caption{Depending on $\gamma, \delta$ parameters and \\$\alpha = 1.5, \beta = 0.8$}
 			\end{subfigure}
-			\caption{A}
+			\caption{Heatmaps of Mean Squared Error (MSE) based on Monte Carlo simulations for characteristic function method.}
 		\end{figure}
 
 		\begin{figure}[H]
 			\begin{subfigure}{.5\textwidth}
 				\centering
 				\includegraphics[width=1\linewidth]{images/heatmap_cf_MAE_alpha_beta.png}
-				\caption{C}
+				\caption{Depending on $\alpha, \beta$ parameters and \\$\gamma = 2, \delta = 0$}
 			\end{subfigure}
 			\begin{subfigure}[r]{.5\textwidth}
 				\centering
 				\includegraphics[width=1\linewidth]{images/heatmap_cf_MAE_gamma_delta.png}
-				\caption{B}
+				\caption{Depending on $\gamma, \delta$ parameters and \\$\alpha = 1.5, \beta = 0.8$}
 			\end{subfigure}
-			\caption{A}
+			\caption{Heatmaps of Mean Absolute Error (MAE) based on Monte Carlo simulations for characteristic function method.}
 		\end{figure}
 		
 \end{document}
