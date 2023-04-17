@@ -33,9 +33,9 @@
 	%\section*{title}
 	\section{Information and formulas}
 		\subsection*{Stable random variable}
-		There are two parameterizations of a random variable from an alpha stable distribution $S(\alpha, \beta , \gamma, \delta; 0)$ and $S(\alpha, \beta , \gamma, \delta; 1)$.
+		There are two parametrization for a random variable from an alpha-stable distribution $S(\alpha, \beta , \gamma, \delta; 0)$ and $S(\alpha, \beta , \gamma, \delta; 1)$.
 		They are uniquely determined by the characteristic function.
-		\begin{definition} A random variable $X$ is stable if and only if $X=^d aZ +b$, with \\$\alpha \in (0,2],\;\beta\in [-1,1],\; a\ne1,\; b\in\mathbb{R}$ and $Z$ is a random variable with characteristic function  
+		\begin{definition} A random variable $X$ is stable if and only if $X=^d aZ +b$, with \\$\alpha \in (0,2],\;\beta\in [-1,1],\; a\ne1,\; b\in\mathbb{R}$ and $Z$ is a random variable with a characteristic function  
 			\begin{gather*}
 				\varphi_Z(u) = \exp(i u Z) =
 				\begin{cases}\label{def:case Z}
@@ -78,8 +78,8 @@
 			\end{gather*}
 		\end{definition}
 
-		Above we defined the general stable law in the 0-parameterization and 1-parameterization.
-		Alternatively, we can swap between the parameterizations using the following theorem;
+		Above we defined the general stable law in the 0-parametrization and 1-parametrization.
+        Furthermore, we can switch between the parametrization using the following theorem:
 		\begin{theorem}Let $Z\sim S(\alpha,\beta,1,0;0)$  with $\alpha \in (0,2]$, $\beta \in [-1,1]$, $\gamma \ge 0$, $\delta\in\mathbb{R}$ then  
 			\begin{gather*}
 				\begin{cases}
@@ -89,9 +89,9 @@
 			\end{gather*}
 		\end{theorem}
 
-		The tail exponent estimation method gives us the information
-		about the index of stability. The tails of stable random variable are asymptotically power laws. 
-		\begin{theorem}[Tail approximation] Let $X \sim S(\alpha, \beta , \gamma, \delta; k)$ with $\alpha \in (0,2)$, $\beta \in (-1,1]$, $k=0,1$ then as~$x\to \infty$:
+        We can estimate the index of stability by using the tail approximation method.
+		The tails of a stable random variable are asymptotic power laws. 
+			\begin{theorem}[Tail approximation] Let $X \sim S(\alpha, \beta , \gamma, \delta; k)$ with $\alpha \in (0,2)$, $\beta \in (-1,1]$, $k=0,1$ then as~$x\to \infty$:
 			\label{theorem:Tail approximation}
 			\begin{align*}
 				1 - F_X(x) &\sim \gamma^\alpha c_a (1+\beta)x^{-\alpha},\\
@@ -104,12 +104,12 @@
 				f_X(-x) &\sim  \alpha \gamma^\alpha (1-\beta)c_a x^{-(\alpha + 1)}
 			\end{align*}
 		\end{theorem}
-		It follows from the above theorem that for $x\to\infty$
+		According to the above theorem, for $x\to\infty$
 		\begin{gather}\label{Tail approximation polifit}
 			1 - F(x) \sim Cx^{-\alpha} \implies \ln(1-F(x)) \sim \ln(C) -\alpha \ln(x)
 		\end{gather}
 
-		\begin{theorem}  Let $X \sim S(\alpha, \beta , \gamma, \delta; k)$ wwith $\alpha \in (0,2]$, $\beta \in [-1,1]$, $\gamma \ge 0$, $\delta\in\mathbb{R}$, $k=0,1$ then
+		\begin{theorem}  Let $X \sim S(\alpha, \beta , \gamma, \delta; k)$ with $\alpha \in (0,2]$, $\beta \in [-1,1]$, $\gamma \ge 0$, $\delta\in\mathbb{R}$, $k=0,1$ then
 			\label{theorem:CF}
 			\begin{align*}
 				|\varphi_X(u)| &= e^{-C|u|^\alpha} \implies \\
@@ -117,7 +117,7 @@
 				\ln(-\ln |\varphi_X(u)|) &= \ln(C) + \alpha\ln|u|
 			\end{align*}
 		\end{theorem}
-		Theorems \ref{theorem:Tail approximation} and \ref{theorem:CF} allows us to determine the stability index using linear regression.
+		Theorems \ref{theorem:Tail approximation} and \ref{theorem:CF} allow us to determine the stability index using linear regression.
 
 		\begin{definition}Let $X_1,\dots, X_n$ be i.i.d. random variables with the common cumulative distribution function $F(t)$. 
 			Then the empirical distribution function is defined as
@@ -137,13 +137,12 @@
 
 		\subsection{Based on the ECDF}
 		\subsubsection{}
-		We gernerated $n = 10^6$ samples of alfa-stable distribution.
+		We generated $n = 10^6$ samples of alpha-stable distribution.
 		A figure \ref{stable_cdf} depicts cumulative distribution function of theoretical variable (blue) compared to generated one (orange).
 		Based on this graph  and the KS test $p\text{-value} = 0.14623$ we do not reject the hypothesis of different distributions and assume that the program that generates the variables is working correctly.
 		
-		Graph at the right side shows CDF for higher values of $x$, thanks to which we can use the first method of estimation parameter $\alpha$ based on theorem \ref{theorem:Tail approximation} and properties \ref{Tail approximation polifit}.    
-		
-		\begin{figure}[H]	
+        The graph at the right side shows CDF for higher values of $x$, thanks to which we can use the first method of estimation parameter $\alpha$ based on theorem \ref{theorem:Tail approximation} and properties \ref{Tail approximation polifit}.		
+		\begin{figure}[H]
 			\begin{subfigure}[h]{.5\textwidth}
 				\centering
 				\includegraphics[width=1\linewidth]{images/stable_CDF.png}
@@ -158,10 +157,10 @@
 		\end{figure}
 
 		Following the first method, using logarithm of distribution's tail, we successfully fitted parameters to our model.
-		Results are shown at figure \ref{tails1}, where blue line is a teoretical distribution, orange line represents empirical one and green is a fitted model.
+		The results are shown in figure \ref{tails1}, where the blue line represents a theoretical distribution, the orange line represents an empirical one, and the green line represents a fitted model.
 		\subsubsection{}
         After checking the correctness of the method, we estimated parameter $\alpha$ using a Monte Carlo simulation with 1000 steps and 20000 samples on each step.
-		Distribution of estimated parameters can be observed at figure \ref{alpha1}, where we have placed density histogram and boxplot.
+		Distribution of estimated parameters can be observed in figure \ref{alpha1}, where we have placed a density histogram and boxplot.
 		We can see, that the mean of estimation is correct, but there are also a lot of outliers.		 
 		
 		\begin{figure}[H]
@@ -179,13 +178,12 @@
 			\begin{subfigure}[r]{.5\textwidth}
 				\centering
 				\includegraphics[width=1\linewidth]{images/cdf_alpha_boxplot.png}
-				\caption{Boxplot}
+				\caption{Boxplot of the $\hat\alpha$ estimator.}
 			\end{subfigure}
 			\caption{Distribution of the estimator of the $\alpha$ parameter based on Monte Carlo simulations for tail approximation method.}\label{alpha1}
 		\end{figure}
 	
-		In addition, we have included basic statistics in the table \ref{tabelka1}. We can see, that the distribution of estimator has high std.  Maximal and minimal values are absolutly too far from true value of $\hat\alpha$. Skewness is equal to 0.28487 and with the analysis of the graph we assess, that distribution is right-skewed. The kurtosis is close to zero, so we can assume that it is leptokurtic distribution, so we can expect havy tails and this is correct with values of quantiles.
-		
+        In addition, we have included basic statistics in the table \ref{tabelka1}. We can see that the distribution of estimator has high std.  Maximal and minimal values are too far from the true value of $\hat\alpha$. Skewness is equal to 0.28487 and with the analysis of the graph we assess that the distribution is right-skewed. The kurtosis is close to zero, so we can assume that it is a leptokurtic distribution, so we can expect heavy tails and this is correct with values of quantiles.		
 		\begin{table}[H]
 			\centering
 			\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|}
@@ -197,13 +195,13 @@
 		\end{table}
 		\subsubsection{}
 		We checked, how selected parameters affect MSE and MAE. We made simulation of 100 steps of Monte Carlo and 5000 samples of generated $\hat\alpha$, to create adequate heatmaps.
-		
-		On figure \ref{heat1} we placed results for Mean Squared Error. At the left side we inserted dependencies of $\alpha$ and $\beta$ using $\gamma=2$ and $\delta=0$ and at the right side we placed dependencies of $\gamma$ and $\delta$ using $\alpha=1.5$ and $\beta=0.8$
-		
-		The main conclusion is, that the smaller $\beta$ we take, the worse results we obtain. The same result we get for $\alpha$. 
-		
-		We get smaller errors within increasing $\gamma$, but for $\delta$ we obtain the best results where it is equal to 0 and farther we go from zero, then worse. Delta should not have influance on the highest of error becouse this method uses aproximation of infinitive values, but our domain is the range from 10 to 30. We did it becouse we decided to optimalise the process of generating $\hat\alpha$, so in this case, selection of $\delta$ has big influance on the generated tails. Anyway, the differences of results depended on $\gamma$ and $\delta$ are smaller than dependent on $\alpha$ and $\beta$.
-		
+        
+        On figure \ref{heat1} we placed results for Mean Squared Error. On the left side we inserted dependencies of $\alpha$ and $\beta$ using $\gamma=2$ and $\delta=0$ and on the right side we placed dependencies of $\gamma$ and $\delta$ using $\alpha=1.5$ and $\beta=0.8$
+        
+        The main conclusion is, that the smaller $\beta$ we take, the worse results we obtain. The same result we get for $\alpha$. 
+        
+        We get smaller errors within increasing $\gamma$, but for $\delta$ we obtain the best results where it is equal to 0 and farther we go from zero, then worse. Delta should not have influence on the highest of error because this method uses approximation of infinitive values, but our domain is the range from 10 to 30. We did it because we decided to optimality the process of generating $\hat\alpha$, so in this case, selection of $\delta$ has a big influence on the generated tails. Anyway, the differences of results depended on $\gamma$ and $\delta$ are smaller than dependent on $\alpha$ and $\beta$.
+    
 		\begin{figure}[H]
 			\begin{subfigure}{.5\textwidth}
 				\centering
@@ -218,8 +216,7 @@
 			\caption{Heatmaps of Mean Squared Error (MSE) based on Monte Carlo simulations for tail approximation method.}\label{heat1}
 		\end{figure}
 	
-		We created also a heatmaps of MAE (figure \ref{heat2}). We used the same parameters as in the case with MSE. In this example we obtain the same dependences, but the only one difference is with the scale of errors, what is meaningful, if we would check the formula of MAE.
-		
+        We also created a heatmaps of MAE (figure \ref{heat2}). We used the same parameters as in the case with MSE. In this example, we obtain the same dependence, but the only one difference is with the scale of errors, what is meaningful, if we would check the formula of MAE.		
 		
 		\begin{figure}[H]
 			\begin{subfigure}{.5\textwidth}
@@ -237,16 +234,14 @@
 
 		\subsection{Based on the CF}
 		\subsubsection{}
-		Now we will consider second method of estimation parameter $\alpha$ [\ref{theorem:CF}]. First we crated an empirical characteristic function by generating 10000 samples from alpha-stabil distribution. At figure \ref{cf1} we presented comparison of theoretical (orange line) and empirical (blue line) CF. We can see, that empirical plot is similar to theoretical one.
-		
+        Now we will consider the second method of estimation parameter $\alpha$ [\ref{theorem:CF}]. First we crated an empirical characteristic function by generating 10000 samples from an alpha-stable distribution. In figure \ref{cf1} we presented comparison of theoretical (orange line) and empirical (blue line) CF. We can see that the empirical plot is similar to the theoretical one.		
 		\begin{figure}[H]
 				\centering
 				\includegraphics[width=1\linewidth]{images/stable_CF.png}
 			\caption{CF of a random variable with an $\alpha$-stable distribution based on $n=10000$ realizations of the random variable for each $t$.}\label{cf1}
 		\end{figure}
 
-		Following this method, using double logarithm on CF, we successfully fitted parameters to our model. Correctness of the fitting is shown in figure \ref{CF_line2}, where blue line is theoretical function, orange in estimated one and green is a line represanting suitable model.
-		
+        Following this method, using double logarithm on CF, we successfully fitted parameters to our model. Correctness of the fitting is shown in figure \ref{CF_line2}, where the blue line is the theoretical function, orange in estimated one and green is a line representing a suitable model.		
 		\begin{figure}[H] 
 			\centering
 			\includegraphics[width=1\linewidth]{images/compare_cf.png}
@@ -256,9 +251,9 @@
 		
 		We checked the correctness of this method by estimating parameter $\alpha$ using a Monte Carlo simulation with 1000 steps and 5000 samples on each step.
 		
-		Distribution of estimated parameters can be observed in figure \ref{alpha2}, where we have placed density histogram and boxplot and we have included basic statistics in the table \ref{tabelka2}.
-		We can see, that the mean of estimation is correct. We obtain better std then using tail approximation method. Whatsmore, in this case, the skewness is low, close to 0. The kurtosis is equal to -0.1926, so the distribution is platokurtic.
-		
+        Distribution of estimated parameters can be observed in figure \ref{alpha2}, where we have placed a density histogram and boxplot, and we have included basic statistics in the table \ref{tabelka2}.
+        We can see that the mean of estimation is correct. We obtain better std than using the tail approximation method. What's more, in this case, the skewness is low, close to 0. The kurtosis is equal to -0.1926, so the distribution is platokurtic.
+        
 		\begin{figure}[H]
 			\begin{subfigure}{.5\textwidth}
 				\centering
@@ -286,11 +281,11 @@
 	
 		\subsubsection{}
 		We checked, how selected parameters affect MSE and MAE. We made simulation of 100 steps of Monte Carlo and 5000 samples of generated $\hat\alpha$, to create adequate heatmaps.
-		
-		On figure \ref{heat3} we placed results for Mean Squared Error. At the left side we inserted dependencies of $\alpha$ and $\beta$ using $\gamma=2$ and $\delta=0$ and at the right side we placed dependencies of $\gamma$ and $\delta$ using $\alpha=1.5$ and $\beta=0.8$
-		
-		In this case, the dependencies are really visuable. We get bigger errors within increasing $\alpha$ and $\gamma$. Changing $\beta$ and $\delta$ has no effect on the size of the error.
-		
+        
+        On figure \ref{heat3} we placed results for Mean Squared Error. On the left side we inserted dependencies of $\alpha$ and $\beta$ using $\gamma=2$ and $\delta=0$ and on the right side we placed dependencies of $\gamma$ and $\delta$ using $\alpha=1.5$ and $\beta=0.8$
+        
+        In this case, the dependencies are really visible. We get bigger errors within increasing $\alpha$ and $\gamma$. Changing $\beta$ and $\delta$ has no effect on the size of the error.
+        
 		\begin{figure}[H]
 			\begin{subfigure}{.5\textwidth}
 				\centering
@@ -305,9 +300,9 @@
 			\caption{Heatmaps of Mean Squared Error (MSE) based on Monte Carlo simulations for characteristic function method.}\label{heat3}
 		\end{figure}
 
-		On figure \ref{heat4} we placed results for Mean Absolute Error. At the left side we inserted dependencies of $\alpha$ and $\beta$ using $\gamma=2$ and $\delta=0$ and at the right side we placed dependencies of $\gamma$ and $\delta$ using $\alpha=1.5$ and $\beta=0.8$
+        On figure \ref{heat4} we placed results for Mean Absolute Error. On the left side we inserted dependencies of $\alpha$ and $\beta$ using $\gamma=2$ and $\delta=0$ and on the right side we placed dependencies of $\gamma$ and $\delta$ using $\alpha=1.5$ and $\beta=0.8$
 
-		The conclussion is that the size of error depend only on $\alpha$. The bigger $\alpha$, the higher error we get. High error at the bottom of right graph is coused by taking $\gamma$ to closed to 0, which is out of domain of alpha-stable distribution.
+        The conclusion is that the size of error depends only on $\alpha$. The bigger $\alpha$, the higher error we get. The high error at the bottom of the right graph is caused by taking $\gamma$ to close to 0, which is out of the domain of alpha-stable distribution.
 
 		\begin{figure}[H]
 			\begin{subfigure}{.5\textwidth}
@@ -324,7 +319,6 @@
 		\end{figure}
 	
 	\subsection{Summary}
-	We presented the operation of both methods, which estimate parameter $\alpha$. We proved, that both of them works correctly. Errors, we obtianed by using the method which bases on characteristic function, depend strongly on parameter $\alpha$.
-	 
+    We presented the operation of both methods, which estimate parameter $\alpha$. We proved that both of them work correctly. Errors, we obtained by using the method which bases on characteristic function, depend strongly on the parameter $\alpha$.	 
 	
 \end{document}
