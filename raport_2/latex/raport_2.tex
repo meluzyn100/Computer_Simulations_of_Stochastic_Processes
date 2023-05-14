@@ -16,6 +16,7 @@
 \usepackage{indentfirst}
 \usepackage{caption}
 \usepackage{subcaption}
+
 \title{Report 2}
 \author{Aleksander Jakóbczyk and Bogdan Banasiak\\ 
 	Index number: 255939 and 256456}
@@ -31,8 +32,8 @@
 	\maketitle
 	\section{Information and formulas}
 	
-		
-	\subsection{Discreate alpha-stable vectore}
+	
+	\subsection{Discrete alpha-stable vector}
 	In case when $\Gamma$ is a discrete spectral measure with a finite number of point masses, i.e.,
 	$$
 	\Gamma(\cdot)=\sum_{j=1}^n \gamma_j \delta_{\mathbf{s}_j}(\cdot)
@@ -76,17 +77,17 @@
 	\mathbf{X}=\left[A^{1 / 2} G_1, A^{1 / 2} G_2, \ldots, A^{1 / 2} G_d\right]
 	$$
 	has symmetric $\alpha$-stable distribution in $\mathbb{R}^d$ and is called a sub-Gaussian SaS random vector in $\mathbb{R}^d$ with underlying Gaussian vector $\mathbf{G}$.
-	Your goal is to check if following statements, assuming the underlying Gaussian vector $\mathbf{G}$ has i.i.d. components with variance $\sigma^2$
+	Your goal is to check if the following statements, assuming the underlying Gaussian vector $\mathbf{G}$ has i.i.d. components with variance $\sigma^2$
 	
 	
-
-	\subsection{Estimatation of spectral measure}
+	
+	\subsection{Estimation of spectral measure}
 	We use the Rachev-Xin-Cheng method (RXC). A value is picked for $r$ and it is used to estimate the measure of as set $A \subset S_d$ by:
 	$$
 	\widehat{\Gamma}(A)=\text { const. } \frac{\#\left\{\mathbf{X}_i:\left|\mathbf{X}_i\right|>r, \mathbf{X}_i \in \operatorname{Cone}(A)\right\}}{\#\left\{\mathbf{X}_i:\left|\mathbf{X}_i\right|>r\right\}} .
 	$$
 	
-	\subsection{Estimatation of characteristic function} \label{teoCF}
+	\subsection{Estimation of characteristic function} \label{teoCF}
 	The empirical characteristic function (ECF) method is straightforward. Given an i.i.d. sample $\mathbf{X}_1, \ldots, \mathbf{X}_k$ of $\alpha$-stable random vectors with spectral measure $\Gamma$, let $\widehat{\varphi}_k(\mathbf{t})$ and $\widehat{I}_k$ be the empirical counterparts of $\phi$ and $I$, i.e. $\widehat{\varphi}_k(\mathbf{t})=(1 / k) \sum_{j=1}^k \exp \left(i<\mathbf{t}, \mathbf{X}_j>\right)$ is the sample characteristic function, and $\widehat{I}_k(\mathbf{t})=-\ln \widehat{\varphi}_k(\mathbf{t})$. Given a grid $\mathbf{t}_1, \ldots, \mathbf{t}_n \in S_d, \vec{I}_{E C F, k}=\left[\hat{I}_k\left(\mathbf{t}_1\right), \ldots, \hat{I}_k\left(\mathbf{t}_n\right)\right]^{\prime}$ is the ECF estimate of $I_{\mathbf{X}}(\cdot)$.
 	
 	\subsection{Codifference estimator}
@@ -95,12 +96,11 @@
 	\tau_{X, Y}=\log (\mathbb{E} \exp (i(X-Y)))-\log (\mathbb{E} \exp (i X))-\log (\mathbb{E} \exp (-i Y))
 	$$
 	\section{Multivariate stable distribution generator}
-
-	We checked if our generator was impolemented correctly, by generating 20000 of two-dim vectors
-	Aby sprawdzić poprawność naszego generatora, wygenerowaliśmy po 20000 supplies dwu wymiarowych wektorów alpha stabilnych dla każdego z poniżej podanych typów.
+	
+	We checked if our generator was implemented correctly, by generating 20000 of two-dim vectors
 	
 	\subsection{Symmetric stable vector}
-	For following parameters we generated vectors and we created plot~\ref{1} - dependence of x and y obtained in vectors.
+	For following parameters, we generated vectors and we created plot~\ref{1} - dependence of x and y obtained in vectors.
 	Symmetric case $\alpha=0.9$ and $n=6$ point masses
 	$$
 	\begin{aligned}
@@ -118,20 +118,20 @@
 		\includegraphics[width=1\linewidth]{images/ex_1_a_alpha_stable_vector_simulation_symmetric_discreet_scatter.png}
 		\caption{Result of simulation of symmetric stable vector for $\alpha=0.9$ and $n=6$.}\label{1}
 	\end{figure}
-
-	We can observe, that points are located on six diffeent direction lines, so we can conclude, that the implementation of our generator in this case should be correct.
+	
+	We can observe that points are located on six different direction lines, so we can conclude, that the implementation of our generator in this case should be correct.
 	
 	\subsection{Stable vector with independent components}
 	
-	In this case we generated vectors using formula from \ref{formula1}. 
+	In this case, we generated vectors using formula from \ref{formula1}. 
 	\\ \\
-	We used following covariance matrix 
+	We used the following covariance matrix 
 	
 	\[\Sigma(G) = \left[{\begin{array}{*{20}c}
 			1 & 0\\
 			0 & 1\end{array} } \right]\]. 
 	
-	By using covariance matrix with zeros on anti-diagonal, we obtain i.i.d. vectors A and G and elements of generated gaussian vector are independent.
+	By using a covariance matrix with zeros on anti-diagonal, we obtain i.i.d. vectors A and G and elements of generated Gaussian vector are independent.
 	
 	We are checking the correctness of the simulation in section 2.
 	
@@ -140,16 +140,16 @@
 		\includegraphics[width=1\linewidth]{images/ex_1_b_alpha_stable_vector_simulation_symmetric_continous_scatter}
 		\caption{Result of stable vector with independent components for $\alpha=1.6$.}\label{2}
 	\end{figure}
-	Thanks to results we obtained and are depicted on graph \ref{2}, we can conclude, that in this case, vectors are also simulated correctly.
+	Thanks to the results we obtained and are depicted on graph \ref{2}, we can conclude, that in this case, vectors are also simulated correctly.
 	
 	\subsection{Stable vector which is not symmetric and has not independent components.}
 	
-	In this case matrix of cavariance is equal:
+	In this case, matrix of covariance is equal:
 	
 	\[\Sigma(G) = \left[{\begin{array}{*{20}c}
 			1 & 0.5\\
 			0.5 & 0.7\end{array} } \right],\]
-	so covariance of vector G is not zero and elements of this vector are not independent. It means, that vector components of vector X are not independent. What's more, in vector G, variance of first element is different from the second one, so generated vectors are not symmetric.
+	so, the covariance of vector G is not zero and elements of this vector are not independent. It means that vector components of vector X are not independent. What's more, in vector G, the variance of the first element is different from the second one, so generated vectors are not symmetric.
 	
 	\begin{figure}[H]
 		\centering
@@ -160,7 +160,7 @@
 	
 	\section{Sub-Gaussian random vector generator.}\label{sec2}
 	
-	To check if our implementation of sub-gaussian random vector generator, we generated 20000 of random vectors using method described in subsection \ref{formula1}, where $\alpha = 1.6$ and following covariance matrix:
+	To check if our implementation of sub-Gaussian random vector generator, we generated 20000 of random vectors using the method described in subsection \ref{formula1}, where $\alpha = 1.6$ and the following covariance matrix:
 	
 	\[\Sigma(G) = \left[{\begin{array}{*{20}c}
 			1 & 0\\
@@ -171,29 +171,29 @@
 		\begin{subfigure}[H]{0.49\textwidth}
 			\centering
 			\includegraphics[width=\textwidth]{images/ex_2_alpha_stable_vector_simulation_sub_gaussian_SaS_catter}
-			\caption{Generated sub-gaussian random vectors}\label{4}
+			\caption{Generated sub-Gaussian random vectors}\label{4}
 		\end{subfigure}
 		\hfill
 		\begin{subfigure}[H]{0.49\textwidth}
 			\centering
 			\includegraphics[width=\textwidth]{images/ex_2_alpha_stable_vector_simulation_sub_gaussian_SaS_heatmap}
-			\caption{Two-dimentional density of generated vectors.}\label{5}
+			\caption{Two-dimensional density of generated vectors.}\label{5}
 		\end{subfigure}
 	\end{figure}
 	
-	At the graph \ref{4} we presented the dependences of first and second values of generated vectors. In addition, on graph \ref{5}, we presented empirical two-dimentional density of the scatterplot. We can see, that results are symmetic. 
-
+	At the graph \ref{4} we presented the dependence of first and second values of generated vectors. In addition, on graph \ref{5}, we presented empirical two-dimensional density of the scatter plot. We can see that the results are symmetric. 
+	
 	\begin{figure}[H]
 		\centering
 		\includegraphics[width=0.8\linewidth]{images/ex_2_spectral_measure}
 		\caption{Estimated spectral measure.}\label{6}
 	\end{figure}
-
+	
 	We also checked spectral measure, the results are depicted at the graph \ref{5}, where a horizontal red line is equal to $\frac{1}{2 \pi}$ what is the value of density of uniform distribution from $-\pi$ to $\pi$. 
-	We also checked using KS-test, if results are uniformly distributed. We got p-value = $0.96$ , so based on the this graph and the result of KS-test, we can conclude, that spectral measure is uniformly distributed.
-
-	We estimated CF of SaS random vector, which is presented at graph \ref{7} and at graph \ref{8} we have included errors between the estimated and the theoretical function. Additionally, in table \ref{tab1}, we included basic statistics of this errors. We can observe, that errors are really small.
-
+	We also checked, using KS-test, if results are uniformly distributed. We got p-value = $0.96$ , so based on the graph and the result of the KS-test, we can conclude, that the spectral measure is uniformly distributed.
+	
+	We estimated CF of S$\alpha$S random vector, which is presented at graph \ref{7} and at graph \ref{8} we have included errors between the estimated and the theoretical function. Additionally, in table \ref{tab1}, we included basic statistics of these errors. We can observe that errors are really small.
+	
 	\begin{figure}
 		\centering
 		\begin{subfigure}[H]{0.49\textwidth}
@@ -205,10 +205,10 @@
 		\begin{subfigure}[H]{0.49\textwidth}
 			\centering
 			\includegraphics[width=1\linewidth]{images/ex_2_error_heatmap}
-			\caption{Errors of comparsion of theoretical and empirical CF of SaS random vector}\label{8}
+			\caption{Errors of comparison of theoretical and empirical CF of SaS random vector}\label{8}
 		\end{subfigure}
 	\end{figure}
-
+	
 	\begin{table}[H]
 		\begin{tabular}{rrrrrrrr}
 			\hline
@@ -217,13 +217,13 @@
 			10000.0 & -0.000252 &  0.00322 & -0.00809 & -0.002605 & -0.000049 &  0.001813 &  0.007082 \\
 			\hline
 		\end{tabular}
-	\caption{Basic statistics of errors between the estimated and the theoretical characteristic function.}\label{tab1}
+		\caption{Basic statistics of errors between the estimated and the theoretical characteristic function.}\label{tab1}
 	\end{table}
 	
-
+	
 	\section{Estimation of $\alpha$ and spectral measure $\Gamma$.}
-
-	Using the method described in \ref{teoCF}, we were able to fit correct function to double-logarithm charactersitic function and based on knowledge of CF from section 4 we estimated parameter $\alpha$.
+	
+	Using the method described in \ref{teoCF}, we were able to fit the correct function to double-logarithm characteristic function and based on knowledge of CF from section 4 we estimated parameter $\alpha$.
 	
 	\begin{figure}[H]
 		\centering
@@ -246,9 +246,9 @@
 			\centering
 			\includegraphics[width=1\linewidth]{images/cf_alpha_estimation_boxplot}
 			\caption{Boxplot of estimated $\alpha$}\label{10}
-		\end{subfigure}\caption{Estimaton's results of $\alpha$}
+		\end{subfigure}\caption{Estimation's results of $\alpha$}
 	\end{figure}
-
+	
 	Basic statistics of our estimations we have located in table \ref{tab2}
 	
 	\begin{table}[H]
@@ -260,14 +260,14 @@
 			1000.0 &  1.599539 &  0.01839 &  1.535825 &  1.586632 &  1.599462 &  1.611326 &  1.65366 \\
 			\hline
 		\end{tabular}
-		\caption{Basic statistics of esitmated $\alpha$.}\label{tab2}
+		\caption{Basic statistics of estimated $\alpha$.}\label{tab2}
 	\end{table}
 	
-	We can see, that mean is close to true $\alpha$ and variance is low. We obtained also small range.
+	We can see that the mean is close to true $\alpha$ and variance is low. We also obtained a small range.
 	
 	\section{Estimation of the characteristic function for multivariate data}
-	Using method described in \ref{teoCF} by function $I(x)$ We are able to estimate CF for stable vector.
-	As an example we estimated CF for vectors with the same parameters as in section \ref{sec2}. (Graph \ref{12})
+	Using the method described in \ref{teoCF} by function $I(x)$ We can estimate CF for a stable vector.
+	As an example, we estimated CF for vectors with the same parameters as in section \ref{sec2}. (Graph \ref{12})
 	\begin{figure}[H]
 		\centering
 		\includegraphics[width=1\linewidth]{images/ex_4_cf_sub_gaussian_SaS}
@@ -275,7 +275,7 @@
 	\end{figure}
 	
 	\section{Estimation of codifference measure}
-	To check correctness of our estimator implementation, we have generated 100000 samples thanks which we estimated codifference for particular cases.
+	To check the correctness of our estimator implementation, we have generated 100000 samples thanks to which we estimated codifference for particular cases.
 	
 	\subsection{First case}
 	Parameters:
@@ -287,11 +287,11 @@
 		\gamma_3 &=0.25 \text{ at } \mathbf{s}_3=(-1,0),\\
 		\gamma_4 &=0.25 \text{ at } \mathbf{s}_4=(0,-1).
 	\end{aligned}$$
-
+	
 	\begin{figure}[H]
 		\centering
 		\includegraphics[width=1\linewidth]{images/ex_5_1_alpha_stable_vector_simulation_discreet_scatter}
-		\caption{CF of sub-gaussian}\label{13}
+		\caption{CF of sub-Gaussian}\label{13}
 	\end{figure}
 	
 	Codifference = 0.0158
@@ -310,22 +310,22 @@
 	\begin{figure}[H]
 		\centering
 		\includegraphics[width=1\linewidth]{images/ex_5_2_alpha_stable_vector_simulation_discreet_scatter}
-		\caption{CF of sub-gaussian}\label{14}
+		\caption{CF of sub-Gaussian}\label{14}
 	\end{figure}
 	
 	Codifference = 0.79
 	
 	\subsection{Third case}
-	Sub-Gaussian vactor with $\alpha =1.6$ covariance matrix:
+	Sub-Gaussian vector with $\alpha =1.6$ covariance matrix:
 	
 	\[\Sigma(G) = \left[{\begin{array}{*{20}c}
 			1 & 0.5\\
 			0.5 & 1\end{array} } \right]\]. 
-
+	
 	\begin{figure}[H]
 		\centering
 		\includegraphics[width=1\linewidth]{images/ex_5_3_alpha_stable_vector_simulation_continuous_scatter}
-		\caption{CF of sub-gaussian}\label{15}
+		\caption{CF of sub-Gaussian}\label{15}
 	\end{figure}
 	
 	Codifference = 0.5778
@@ -333,7 +333,6 @@
 	
 	
 	\section{Summary}
-	We checked correctness of implementation of all methods and estimators. In every case we obtained good results.
+	We checked correctness of implementation of all methods and estimators. In every case, we obtained good results.
 	
 \end{document}
-
