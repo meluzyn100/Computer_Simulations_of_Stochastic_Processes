@@ -108,7 +108,8 @@
 	\begin{equation}
 		\tau_{X, Y}=\log (\mathbb{E} \exp (i(X-Y)))-\log (\mathbb{E} \exp (i X))-\log (\mathbb{E} \exp (-i Y)).
 	\end{equation}
-
+	
+	\newpage
 	\section{Multivariate stable distribution generator}
 	
 	We checked if our generator was implemented correctly, by generating 20000 of two-dim vectors
@@ -124,10 +125,9 @@
 		\item \gamma_5  =0.125 \text { at } \mathbf{s}_5=(-1 / 2,-\sqrt{3} / 2),
 		\item \gamma_6  =0.25 \text { at } \mathbf{s}_6=(1 / 2,-\sqrt{3} / 2).
 	\end{mathitemize}
-	
 	\begin{figure}[H]
 		\centering
-		\includegraphics[width=1\linewidth]{images/ex_1_a_alpha_stable_vector_simulation_symmetric_discreet_scatter.png}
+		\includegraphics[width=0.85\linewidth]{images/ex_1_a_alpha_stable_vector_simulation_symmetric_discreet_scatter.png}
 		\caption{Result of simulation of symmetric stable vector for $\alpha=0.9$ and $n=6$.}\label{1}
 	\end{figure}
 	
@@ -135,24 +135,27 @@
 	
 	\subsection{Stable vector with independent components}
 	
-	In this case, we generated vectors using formula from \ref{formula1}. 
-	We used the following covariance matrix 
-	\begin{equation*}
-		\Sigma(G) = \left[{\begin{array}{*{20}c}
-			1 & 0\\
-			0 & 1\end{array} } \right].
-	\end{equation*}
+	\begin{mathitemize}
+		\item \alpha    =1.6 ,
+		\item \gamma_1 =0.25 \text{ at } \mathbf{s}_1=(1,0),
+		\item \gamma_2 =0.25 \text{ at } \mathbf{s}_2=(0,1),
+		\item \gamma_3 =0.25 \text{ at } \mathbf{s}_3=(-1,0),
+		\item \gamma_4 =0.25 \text{ at } \mathbf{s}_4=(0,-1).
+	\end{mathitemize}
 	
-	By using a covariance matrix with zeros on anti-diagonal, we obtain i.i.d. vectors A and G and elements of generated Gaussian vector are independent.
-	
-	We are checking the correctness of the simulation in section 2.
-	
+	For discrite case with parameters mentioned above, we simulated independent $\alpha$-stable vector.
 	\begin{figure}[H]
 		\centering
-		\includegraphics[width=1\linewidth]{images/ex_1_b_alpha_stable_vector_simulation_symmetric_continous_scatter}
+		\includegraphics[width=0.95\linewidth]{images/ex_1_b_alpha_stable_vector_simulation_symmetric_continous_scatter}
 		\caption{Result of stable vector with independent components for $\alpha=1.6$.}\label{2}
 	\end{figure}
 	Thanks to the results we obtained and are depicted on graph \ref{2}, we can conclude, that in this case, vectors are also simulated correctly.
+	
+	For generated vectors, we calculated following covariance of marginals of vector, which is equal to -$0.02$. It is really close to zero, so we can assume, that we sucessfully generated independent case.
+	
+	\begin{equation*}
+		\text{Cov}(X,Y) =  -0.02
+	\end{equation*}
 	
 	\subsection{Stable vector which is not symmetric and has not independent components.}
 	
@@ -162,16 +165,25 @@
 			1 & 0.5\\
 			0.5 & 0.7\end{array} } \right],
 	\end{equation*}
+	Every element of vector $X$ is multiplied by proper weight.
+	\begin{equation}
+		\mathbf{X}=\left[w_1 A^{1 / 2} G_1,\: w_2 A^{1 / 2} G_2\right],
+	\end{equation}
 
-	so, the covariance of vector G is not zero and elements of this vector are not independent. It means that vector components of vector X are not independent. What's more, in vector G, the variance of the first element is different from the second one, so generated vectors are not symmetric.
+	where $w = (w_1, 1-w_1) = (\frac{1}{3},\frac{2}{3})$.
 	
+	In our case the covariance of marginals of vector G is not zero and elements of this vector are not independent. It means that vector components of vector X are not independent.
+	In addition, using different weights on symetric case, provide us an non symetric output. 
+
 	\begin{figure}[H]
 		\centering
-		\includegraphics[width=1\linewidth]{images/ex_1_c_alpha_stable_vector_simulation_symmetric_discreet_scatter}
+		\includegraphics[width=0.9\linewidth]{images/ex_1_c_alpha_stable_vector_simulation_symmetric_discreet_scatter}
 		\caption{Result of $\alpha$ stable vector which is not symmetric and has not independent components for $\alpha=1.6$.}\label{3}
 	\end{figure}
 	The results, shown on the graph \ref{3} confirm the theoretical assumptions, so we can assume that our implementation works correctly in this case as well.
 	
+	We are checking the correctness of the simulation sub-Gaussian vector in section 2.
+
 	\section{Sub-Gaussian random vector generator.}\label{sec2}
 	
 	To check if our implementation of sub-Gaussian random vector generator, we generated 20000 of random vectors using the method described in subsection \ref{formula1}, where $\alpha = 1.6$ and the following covariance matrix:
@@ -181,15 +193,15 @@
 			0 & 1\end{array} } \right].
 	\end{equation*}
 	
-	\begin{figure}\label{dwa}
+	\begin{figure}[H]\label{dwa}
 		\centering
-		\begin{subfigure}[H]{0.49\textwidth}
+		\begin{subfigure}{0.49\textwidth}
 			\centering
 			\includegraphics[width=\textwidth]{images/ex_2_alpha_stable_vector_simulation_sub_gaussian_SaS_catter}
 			\caption{Generated sub-Gaussian random vectors.}\label{4}
 		\end{subfigure}
 		\hfill
-		\begin{subfigure}[H]{0.49\textwidth}
+		\begin{subfigure}{0.49\textwidth}
 			\centering
 			\includegraphics[width=\textwidth]{images/ex_2_alpha_stable_vector_simulation_sub_gaussian_SaS_heatmap}
 			\caption{Two-dimensional density of generated vectors.}\label{5}
@@ -201,24 +213,24 @@
 	
 	\begin{figure}[H]
 		\centering
-		\includegraphics[width=0.8\linewidth]{images/ex_2_spectral_measure}
+		\includegraphics[width=0.55\linewidth]{images/ex_2_spectral_measure}
 		\caption{Estimated spectral measure.}\label{6}
 	\end{figure}
 	
-	We also checked spectral measure, the results are depicted at the graph \ref{5}, where a horizontal red line is equal to $\frac{1}{2 \pi}$ what is the value of density of uniform distribution from $-\pi$ to $\pi$. 
+	We also checked spectral measure, the results are depicted at the graph \ref{6}, where a horizontal red line is equal to $\frac{1}{2 \pi}$ what is the value of density of uniform distribution from $-\pi$ to $\pi$. 
 	We also checked, using KS-test, if results are uniformly distributed. We got p-value = $0.96$ , so based on the graph and the result of the KS-test, we can conclude, that the spectral measure is uniformly distributed.
 	
 	We estimated CF of S$\alpha$S random vector, which is presented at graph \ref{7} and at graph \ref{8} we have included errors between the estimated and the theoretical function. Additionally, in table \ref{tab1}, we included basic statistics of these errors. We can observe that errors are really small.
 	
-	\begin{figure}
+	\begin{figure}[H]
 		\centering
-		\begin{subfigure}[H]{0.49\textwidth}
+		\begin{subfigure}{0.49\textwidth}
 			\centering
 			\includegraphics[width=1\linewidth]{images/ex_2_ecf}
 			\caption{ECF of generated vectors.}\label{7}
 		\end{subfigure}
 		\hfill
-		\begin{subfigure}[H]{0.49\textwidth}
+		\begin{subfigure}{0.49\textwidth}
 			\centering
 			\includegraphics[width=1\linewidth]{images/ex_2_error_heatmap}
 			\caption{Errors of comparison of theoretical and empirical CF of SaS random vector.}\label{8}
@@ -307,7 +319,7 @@
 	
 	\begin{figure}[H]
 		\centering
-		\includegraphics[width=1\linewidth]{images/ex_5_1_alpha_stable_vector_simulation_discreet_scatter}
+		\includegraphics[width=0.9\linewidth]{images/ex_5_1_alpha_stable_vector_simulation_discreet_scatter}
 		\caption{Result of simulation.}\label{13}
 	\end{figure}
 	
